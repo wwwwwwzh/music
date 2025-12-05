@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Sheet Music & Keyboard Highlighting Test</title>
+  <link rel="stylesheet" href="piano-keyboard.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .demo-section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .feature-list {
+      background: #e3f2fd;
+      padding: 15px;
+      border-left: 4px solid #2196f3;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .feature-list h3 {
+      margin-top: 0;
+    }
+    .feature-list li {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎹 Live Sheet Music & Keyboard Highlighting</h1>
+
+  <div class="feature-list">
+    <h3>New Features:</h3>
+    <ul>
+      <li>🎵 <strong>Live Sheet Music</strong> - See the last 8 notes you played in real-time</li>
+      <li>⌨️ <strong>Keyboard Highlighting</strong> - All pianos highlight when you press keyboard keys</li>
+      <li>🖱️ <strong>Click Tracking</strong> - Mouse clicks are also tracked and displayed</li>
+      <li>🎹 <strong>Multi-Piano Support</strong> - Highlights work across all piano instances on the page</li>
+    </ul>
+  </div>
+
+  <div class="demo-section">
+    <h2>Demo 1: With Live Sheet Music</h2>
+    <p>Try playing notes with your keyboard (A-L for white keys, Q-P for black keys) or click the piano keys!</p>
+    <div id="piano-live"
+         data-piano-auto-init
+         data-show-live-sheet="true"
+         data-melodies='[
+           {"path": "assets/motifs/castle-in-the-sky.json", "label": "Play Castle in the Sky"}
+         ]'></div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Demo 2: Second Piano (Test Cross-Highlighting)</h2>
+    <p>Play notes on either piano - watch both highlight! The live sheet music above updates from both pianos.</p>
+    <div id="piano-second"
+         data-piano-auto-init
+         data-start="C4"
+         data-end="C5"
+         data-height="120"
+         data-melodies='[
+           {"path": "assets/motifs/hedwigs-theme.json", "label": "Play Hedwig&#39;s Theme"}
+         ]'></div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Demo 3: With Auto-Generated Sheet Music + Live Sheet</h2>
+    <p>This combines all features: melody sheet music preview AND live playing feedback.</p>
+    <div id="piano-full"
+         data-piano-auto-init
+         data-show-sheet-music="true"
+         data-show-live-sheet="true"
+         data-melodies='[
+           {"path": "assets/motifs/castle-in-the-sky.json", "label": "Play Castle in the Sky"}
+         ]'></div>
+  </div>
+
+  <div class="feature-list">
+    <h3>How to Use:</h3>
+    <ul>
+      <li><strong>Keyboard shortcuts:</strong> Press A-L keys for white notes, Q-W-E-R-T-Y-U-I-O-P for black notes</li>
+      <li><strong>Mouse:</strong> Click and hold piano keys</li>
+      <li><strong>Live sheet:</strong> Shows your last 8 played notes automatically</li>
+      <li><strong>Cross-highlighting:</strong> All pianos on the page highlight simultaneously</li>
+    </ul>
+  </div>
+
+  <!-- Load libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/abcjs@6/dist/abcjs-basic-min.js"></script>
+  <script src="abc-sheet-music.js"></script>
+  <script src="piano-keyboard.js"></script>
+</body>
+</html>

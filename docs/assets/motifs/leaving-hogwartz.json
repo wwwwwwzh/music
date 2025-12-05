@@ -1,0 +1,46 @@
+{
+  "title": "Leaving Hogwarts",
+  "key": "G Major",
+  "timeSignature": "4/4",
+  "description": "The 'Family Theme' melody often associated with the finale",
+  "notes": [
+    "A4",
+    "B4",
+    "C#5",
+
+    "C#5",
+    "B4",
+    "A4",
+
+    "G#4",
+    "A4",
+    "B4",
+
+    "A4",
+    "G#4",
+    "F#4",
+
+    "F#5",
+    "E5"
+  ],
+  "durations": [
+    "4n",
+    "4n",
+    "4n",
+
+    "4n",
+    "4n",
+    "4n",
+
+    "4n",
+    "4n",
+    "4n",
+
+    "4n",
+    "4n",
+    "4n",
+
+    "2n",
+    "2n"
+  ]
+}

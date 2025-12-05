@@ -1,13 +1,22 @@
 <link rel="stylesheet" href="/piano-keyboard.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/abcjs@6/dist/abcjs-basic-min.js"></script>
+<script src="/abc-sheet-music.js"></script>
+<script src="/piano-keyboard.js"></script>
 
-<!-- Example 1: Piano with melodies using data attributes -->
-<div id="/piano-keyboard-widget" data-piano-auto-init data-melodies='[
+### Example 1: Piano with sheet music + live note tracking
+<div id="piano-keyboard-widget" data-piano-auto-init
+     data-show-sheet-music="true"
+     data-show-live-sheet="true"
+     data-start="G4"
+     data-end="F6"
+     data-height="150"
+     data-melodies='[
   {"path": "/assets/motifs/hedwigs-theme.json", "label": "Play Hedwig&#39;s Theme"},
-  {"path": "/assets/motifs/castle-in-the-sky.json", "label": "Play Castle in the Sky"}
+  {"path": "/assets/motifs/castle-in-the-sky.json", "label": "Play Castle in the Sky"},
+  {"path": "/assets/motifs/leaving-hogwartz.json", "label": "Leaving Hogwartz"}
 ]'></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-<script src="/piano-keyboard.js"></script>
 
 ---
 
@@ -19,20 +28,6 @@
   initPiano('piano-only');
 </script>
 
-### Example 3: Piano with Custom Melodies
-<div id="piano-custom"></div>
-<script>
-  initPiano('piano-custom', {
-    melodies: [
-      { path: 'my-song.json', label: 'Play My Song' },
-      { path: 'another-song.json', label: 'Play Another' }
-    ]
-  });
-</script>
-
-### Example 4: Smaller Piano (Custom Height)
-<div id="piano-small" data-piano-auto-init data-height="100"></div>
-
 ### Example 5: Piano with Limited Key Range
 <div id="piano-range" data-piano-auto-init data-start="C4" data-end="C5"></div>
 
@@ -40,19 +35,15 @@
 <div id="piano-custom-size"></div>
 <script>
   initPiano('piano-custom-size', {
-    height: 200,
-    start: 'F4',
-    end: 'F5',
+    height: 100,
+    start: 'C4',
+    end: 'F4',
     melodies: [
       { path: '/assets/motifs/hedwigs-theme.json', label: 'Play Hedwig\'s Theme' }
     ]
   });
 </script>
 
-### Example 7: Just a Play Button (No Piano)
-<button onclick="loadAndPlayMelody('/assets/motifs/hedwigs-theme.json')">
-  Play Hedwig's Theme
-</button>
 
 ---
 
