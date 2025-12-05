@@ -1,0 +1,26 @@
+{
+  "title": "Hedwig's Theme",
+  "key": "E Minor",
+  "timeSignature": "3/4",
+  "description": "Opening bars from Harry Potter",
+  "notes": [
+    "B4",
+    "E5",
+    "G5",
+    "F#5",
+    "E5",
+    "B5",
+    "A5",
+    "F#5"
+  ],
+  "durations": [
+    "8n",
+    "4n.",
+    "8n",
+    "8n",
+    "4n",
+    "4n",
+    "2n",
+    "2n"
+  ]
+}

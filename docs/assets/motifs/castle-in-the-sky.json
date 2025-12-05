@@ -1,0 +1,25 @@
+{
+  "title": "Castle in the Sky",
+  "key": "A Minor",
+  "timeSignature": "4/4",
+  "description": "Main chorus melody from Laputa",
+  "notes": [
+    "A4",
+    "B4",
+    "C5",
+    "B4",
+    "C5",
+    "E5",
+    "B4"
+  ],
+  "durations": [
+    "8n",
+    "8n",
+    "4n.",
+    "8n",
+    "4n",
+    "4n",
+    "4n",
+    "2n."
+  ]
+}

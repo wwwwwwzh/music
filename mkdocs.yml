@@ -1,0 +1,29 @@
+site_name: Music
+
+theme:
+  name: material
+
+plugins:
+  # - search
+  - awesome-pages
+  - exclude
+  - enumerate-headings: # https://pypi.org/project/mkdocs-enumerate-headings-plugin/
+      strict: false
+
+validation:
+  absolute_links: relative_to_docs
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - ./javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+
+exclude_docs: |
+  - Logs.md
+
+draft_docs: |
+  - Logs.md
