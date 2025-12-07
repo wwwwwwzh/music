@@ -6,6 +6,8 @@
 
 <melody path="/assets/motifs/hedwigs-theme.json" label="🎵 Hedwig's Theme" sheet></melody>
 <melody path="/assets/motifs/leaving-hogwartz.json" label="🎵 Leaving Hogwarts"></melody>
+<melody path="/assets/motifs/twinkle-twinkle.txt" label="Twinkle"></melody>
+<melody path="/assets/motifs/turkish-march.txt" label="Turkish"></melody>
 
 ## Studio Ghibli
 

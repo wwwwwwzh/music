@@ -4,9 +4,18 @@
  *        <global-piano height="180" start="C3" end="C6"></global-piano>
  */
 (function() {
+  // Create stronger, longer-lasting piano tone
   const synth = new Tone.PolySynth(Tone.Synth, {
-    oscillator: { type: 'triangle' },
-    envelope: { attack: 0.005, decay: 0.1, sustain: 0.3, release: 1 }
+    oscillator: {
+      type: 'triangle'
+    },
+    envelope: {
+      attack: 0.005,
+      decay: 0.3,
+      sustain: 0.6,  // Higher sustain for longer tone
+      release: 2.5   // Longer release for sustained sound
+    },
+    volume: 2  // Louder
   }).toDestination();
 
   let globalPiano = null;
@@ -15,6 +24,8 @@
   const allKeyElements = {};
   const recentNotes = [];
   const maxRecentNotes = 12;
+  let currentMelodyPlaying = null; // Track currently playing melody
+  let stopMelodyFlag = false; // Flag to stop melody playback
 
   // Parse note index for sorting
   function noteIndex(noteStr) {
@@ -277,6 +288,56 @@
     element.style.display = 'none'; // Hide the tag itself
   }
 
+  // Parse simple text format melody file
+  async function parseTextMelody(text) {
+    const lines = text.trim().split('\n').map(line => line.trim()).filter(line => line);
+
+    if (lines.length < 2) {
+      throw new Error('Text melody must have at least key and time signature');
+    }
+
+    const key = lines[0];
+    const timeSignature = lines[1];
+    const notes = [];
+    const durations = [];
+
+    // Parse note lines (format: "A4:4n" or "rest:4n")
+    for (let i = 2; i < lines.length; i++) {
+      const line = lines[i];
+      const parts = line.split(':');
+
+      if (parts.length !== 2) {
+        console.warn(`Skipping invalid line: ${line}`);
+        continue;
+      }
+
+      const note = parts[0].trim();
+      const duration = parts[1].trim();
+
+      notes.push(note);
+      durations.push(duration);
+    }
+
+    return {
+      key,
+      timeSignature,
+      notes,
+      durations
+    };
+  }
+
+  // Load melody from path (supports .json and .txt)
+  async function loadMelody(path) {
+    const response = await fetch(path);
+
+    if (path.endsWith('.txt')) {
+      const text = await response.text();
+      return parseTextMelody(text);
+    } else {
+      return await response.json();
+    }
+  }
+
   // Create melody button from tag
   async function createMelodyButton(element) {
     const path = element.getAttribute('path');
@@ -312,11 +373,36 @@
     button.className = 'melody-button';
     button.textContent = label;
     button.onclick = async () => {
+      // If this button is already playing, stop it
+      if (currentMelodyPlaying === button) {
+        stopMelodyFlag = true;
+        currentMelodyPlaying = null;
+        button.style.opacity = '1';
+        return;
+      }
+
+      // Stop any currently playing melody
+      if (currentMelodyPlaying) {
+        stopMelodyFlag = true;
+        currentMelodyPlaying.style.opacity = '1';
+        // Wait a bit for the previous melody to stop
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+
+      // Start playing this melody
+      currentMelodyPlaying = button;
+      stopMelodyFlag = false;
+      button.style.opacity = '0.6';
+
       try {
-        const response = await fetch(path);
-        const melody = await response.json();
+        const melody = await loadMelody(path);
 
         for (let i = 0; i < melody.notes.length; i++) {
+          // Check if we should stop (this button was stopped by another)
+          if (stopMelodyFlag || currentMelodyPlaying !== button) {
+            break;
+          }
+
           const note = melody.notes[i];
           const duration = melody.durations[i];
 
@@ -332,8 +418,18 @@
             allKeyElements[note].classList.remove('active');
           }
         }
+
+        // Finished playing (or stopped)
+        if (currentMelodyPlaying === button) {
+          currentMelodyPlaying = null;
+          button.style.opacity = '1';
+        }
       } catch (error) {
         console.error('Error playing melody:', error);
+        if (currentMelodyPlaying === button) {
+          currentMelodyPlaying = null;
+          button.style.opacity = '1';
+        }
       }
     };
 
